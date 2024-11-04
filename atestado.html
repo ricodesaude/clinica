@@ -5,92 +5,150 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atestado Médico</title>
     <style>
+        /* Estilos Globais */
         body {
             font-family: Arial, sans-serif;
             background: #f4f4f4;
             padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
+        
+        /* Container Principal */
         .container {
             max-width: 800px;
-            margin: auto;
+            width: 100%;
             background: white;
-            padding: 30px;
+            padding: 20px;
             border: 1px solid #ccc;
             border-radius: 5px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             position: relative;
         }
+        
+        /* Logo */
         .logo {
             position: absolute;
             top: 20px;
             right: 20px;
-            width: 170px;
+            width: 120px;
             height: auto;
         }
+        
+        /* Informações da Clínica */
         .informacoes-clinica {
             position: absolute;
             top: 20px;
             left: 20px;
             text-align: left;
+            max-width: 50%;
         }
+        
+        /* Títulos */
         h2 {
             text-align: center;
             margin: 20px 0;
         }
+        
+        /* Área do Carimbo */
         .carimbo {
             border-top: 1px solid #000;
             margin-top: 80px;
             padding-top: 10px;
         }
+        
+        /* Centralização do Botão */
         .button-container {
-            text-align: center; /* Alinha o botão ao centro */
-            margin-top: 20px; /* Espaço acima do botão */
+            text-align: center;
+            margin-top: 20px;
         }
+        
+        /* Botão de Pagamento */
         .botao-pagamento {
             padding: 10px 20px;
             font-size: 16px;
             color: white;
-            background-color: #28a745; /* Cor verde */
+            background-color: #28a745;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-        }
-        .botao-pagamento:hover {
-            background-color: #218838; /* Cor verde mais escura ao passar o mouse */
+            transition: background-color 0.3s;
         }
         
+        .botao-pagamento:hover {
+            background-color: #218838;
+        }
+        
+        /* Ajustes para Dispositivos Menores */
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+
+            .logo {
+                width: 80px;
+                top: 10px;
+                right: 10px;
+            }
+
+            .informacoes-clinica {
+                top: 10px;
+                left: 10px;
+                font-size: 14px;
+                max-width: 60%;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            .carimbo p {
+                font-size: 14px;
+            }
+
+            .botao-pagamento {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Logo -->
         <img src="logo.png" alt="Logo da Clínica" class="logo">
         
+        <!-- Informações da Clínica -->
         <div class="informacoes-clinica">
             <h4>Clínica Médica Doctorcode</h4>
-            <h4></h4>
         </div>
-        <br><br><br><br><br><br>
         
+        <!-- Título do Atestado -->
         <h2>Atestado Médico</h2>
         
+        <!-- Conteúdo do Atestado -->
         <p>Atesto para os devidos fins, que o(a) sr(a), <strong><span id="nome"></span></strong>, portador(a) do <strong>CPF: <span id="cpf"></span></strong>.</p>
         <p>foi atendido no dia <span id="dataAtestado"></span> e necessita de <span id="diasAfasta"></span> dias de afastamento por motivo de doença.</p>
         <p><strong>CID: <span id="cid"></span></strong></p>
-        <br><br><br><br><br><br>
         
-        <p><strong><strong> assinatura do paciente: </span></strong></p>
+        <p><strong>Assinatura do paciente:</strong></p>
 
+        <!-- Área do Carimbo -->
         <div class="carimbo">
             <p>Assinatura do Médico: ________________________</p>
             <p>Dr. Fulano de Tal - CRM 12345</p>
         </div>
-        
     </div>
+
+    <!-- Informação Adicional -->
     <div>
         <h3>Nossos documentos são originais e possuem CRM ativo da sua cidade. Seu nome ficará salvo no sistema de nossa unidade, validando a consulta.</h3>
         <h4>O documento só é validado após o pagamento, quando ficará ativo. Após o pagamento, será possível fazer o download do documento original.</h4>
     </div>
 
+    <!-- Botão de Pagamento -->
     <div class="button-container">
         <a href="pagamento.html">
             <button class="botao-pagamento">Ir para Pagamento</button>
@@ -106,16 +164,16 @@
 
         // Função para formatar a data
         function formatarData(data) {
-            const partes = data.split('-');
-            return `${partes[2]}/${partes[1]}/${partes[0]}`; // Formato DD/MM/YYYY
+            if (data) {
+                const partes = data.split('-');
+                return `${partes[2]}/${partes[1]}/${partes[0]}`;
+            }
+            return '___/___/___';
         }
 
-        // Adicionando os dados do período de afastamento
+        // Exibindo data formatada
         const dataAtestado = localStorage.getItem('dataAtestado');
-        const dataFim = localStorage.getItem('dataFim');
-        document.getElementById('dataAtestado').textContent = formatarData(dataAtestado) || '___/___/___';
-        document.getElementById('dataFim').textContent = formatarData(dataFim) || '___/___/___';
+        document.getElementById('dataAtestado').textContent = formatarData(dataAtestado);
     </script>
-
 </body>
 </html>

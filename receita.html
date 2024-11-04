@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receita Médica</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .logo {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 100px;
+            height: auto;
+        }
+        .linha {
+            border-top: 1px solid #000;
+            margin-top: 50px;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="logo.png" alt="Logo da Clínica" class="logo">
+        
+        <h1>Clínica Exemplar</h1>
+        <h2>Receita Médica</h2>
+        
+        <p>Eu, Dr. Fulano de Tal, médico responsável, CRM 12345, prescrevo para:</p>
+        
+        <p><strong>Nome do Paciente:</strong> <span id="nome"></span></p>
+        <p><strong>CPF:</strong> <span id="cpf"></span></p>
+        
+        <h3>Medicamentos Prescritos:</h3>
+        <ul id="lista-medicamentos"></ul>
+
+        <div class="linha">
+            <p>Assinatura do Médico: ________________________</p>
+            <p>Dr. Fulano de Tal - CRM 12345</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('nome').textContent = localStorage.getItem('nome');
+        document.getElementById('cpf').textContent = localStorage.getItem('cpf');
+
+        const medicamentos = JSON.parse(localStorage.getItem('medicamentos'));
+        const listaMedicamentos = document.getElementById('lista-medicamentos');
+        medicamentos.forEach(med => {
+            const li = document.createElement('li');
+            li.textContent = `${med.nome} - ${med.dosagem} mg`;
+            listaMedicamentos.appendChild(li);
+        });
+    </script>
+</body>
+</html>

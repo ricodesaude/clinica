@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Pagamento</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border: 2px solid #e9ecef;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .summary {
+            margin-bottom: 20px;
+            padding: 20px;
+            background: #e9ecef;
+            border-radius: 5px;
+        }
+        .summary h3 {
+            margin: 0 0 10px 0;
+            color: #007bff;
+        }
+        .summary p {
+            margin: 5px 0;
+        }
+        .payment-option {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f9f9f9;
+            transition: background 0.3s;
+        }
+        .payment-option:hover {
+            background: #e9ecef;
+        }
+        .payment-option img {
+            width: 40px; /* Ajustado para tamanho menor */
+            height: auto;
+        }
+        .radio-group {
+            display: flex;
+            align-items: center;
+        }
+        .radio-group input {
+            margin-right: 10px;
+        }
+        .button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            margin-top: 20px;
+            transition: background 0.3s;
+        }
+        .button:hover {
+            background-color: #218838;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .valor {
+            font-size: 24px;
+            font-weight: bold;
+            color: #28a745;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #777;
+        }
+        .security-icons {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .security-icons img {
+            width: 40px;
+            height: auto;
+            margin: 0 10px;
+        }
+        .card-info {
+            display: none; /* Inicialmente escondido */
+            margin-top: 20px;
+        }
+        .pix-info {
+            display: none; /* Inicialmente escondido */
+            margin-top: 20px;
+            text-align: center;
+        }
+        .pix-info img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Checkout - Pagamento</h2>
+
+        <div class="summary">
+            <h3>Resumo do Pedido</h3>
+            <p>Produto: Atestado Médico</p>
+            <p>Valor: R$ 49,99</p>
+        </div>
+
+        <h2>Selecione o Método de Pagamento</h2>
+
+        <div class="payment-option">
+            <div class="radio-group">
+                <input type="radio" id="pix" name="paymentMethod" value="pix" required onclick="togglePixInfo(true); toggleCardInfo(false);">
+                <label for="pix">Pix</label>
+            </div>
+            <img src="https://via.placeholder.com/40?text=Pix" alt="Logo do Pix">
+        </div>
+
+        <div class="payment-option">
+            <div class="radio-group">
+                <input type="radio" id="creditCard" name="paymentMethod" value="creditCard" onclick="toggleCardInfo(true); togglePixInfo(false);">
+                <label for="creditCard">Cartão de Crédito</label>
+            </div>
+            <img src="https://via.placeholder.com/40?text=CC" alt="Logo de Cartão de Crédito">
+        </div>
+
+        <div class="payment-option">
+            <div class="radio-group">
+                <input type="radio" id="debitCard" name="paymentMethod" value="debitCard" onclick="toggleCardInfo(true); togglePixInfo(false);">
+                <label for="debitCard">Cartão de Débito</label>
+            </div>
+            <img src="https://via.placeholder.com/40?text=DC" alt="Logo de Cartão de Débito">
+        </div>
+
+        <div class="valor">Valor a Pagar: R$ 49,99</div>
+
+        <div class="card-info" id="cardInfo">
+            <h2>Informações do Cartão</h2>
+            <div class="form-group">
+                <label for="cardNumber">Número do Cartão:</label>
+                <input type="text" id="cardNumber" name="cardNumber" placeholder="XXXX-XXXX-XXXX-XXXX" required>
+            </div>
+            <div class="form-group">
+                <label for="expirationDate">Validade:</label>
+                <input type="text" id="expirationDate" name="expirationDate" placeholder="MM/AA" required>
+            </div>
+            <div class="form-group">
+                <label for="cvv">CVV:</label>
+                <input type="text" id="cvv" name="cvv" placeholder="XXX" required>
+            </div>
+        </div>
+
+        <div class="pix-info" id="pixInfo">
+            <h2>Informações do Pix</h2>
+            <img src="https://via.placeholder.com/300?text=C%C3%B3digo+QR+do+Pix" alt="Código QR do Pix">
+            <p>Ou copie a chave Pix abaixo:</p>
+            <input type="text" value="seu-email@example.com" readonly id="pixKey">
+            <button onclick="copyPixKey()">Copiar Chave Pix</button>
+        </div>
+
+        <h2>Dados do Cliente</h2>
+        <form id="paymentForm">
+            <div class="form-group">
+                <label for="nome">Nome Completo:</label>
+                <input type="text" id="nome" name="nome" required>
+            </div>
+            <div class="form-group">
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="telefone">Telefone:</label>
+                <input type="tel" id="telefone" name="telefone" required>
+            </div>
+            <button type="button" class="button" onclick="validarPagamento()">Finalizar Pagamento</button>
+        </form>
+
+        <div class="security-icons">
+            <img src="https://via.placeholder.com/40?text=🔒" alt="Ícone de Segurança" title="Transações Seguras">
+            <img src="https://via.placeholder.com/40?text=✅" alt="Selo de Confiabilidade" title="Compra Confiável">
+        </div>
+
+        <div class="footer">
+            <p>Ao clicar em "Finalizar Pagamento", você concorda com os nossos Termos de Serviço e Política de Privacidade.</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleCardInfo(show) {
+            const cardInfoDiv = document.getElementById('cardInfo');
+            cardInfoDiv.style.display = show ? 'block' : 'none';
+        }
+
+        function togglePixInfo(show) {
+            const pixInfoDiv = document.getElementById('pixInfo');
+            pixInfoDiv.style.display = show ? 'block' : 'none';
+        }
+
+        function copyPixKey() {
+            const pixKeyInput = document.getElementById('pixKey');
+            pixKeyInput.select();
+            document.execCommand("copy");
+            alert("Chave Pix copiada: " + pixKeyInput.value);
+        }
+
+        function validarPagamento() {
+            const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
+            const nome = document.getElementById('nome').value;
+            const email = document.getElementById('email').value;
+            const telefone = document.getElementById('telefone').value;
+
+            if (!paymentMethod) {
+                alert('Por favor, selecione um método de pagamento.');
+                return;
+            }
+
+            if (paymentMethod.value === 'creditCard' || paymentMethod.value === 'debitCard') {
+                const cardNumber = document.getElementById('cardNumber').value;
+                const expirationDate = document.getElementById('expirationDate').value;
+                const cvv = document.getElementById('cvv').value;
+
+                // Simulação de erro de transação
+                if (cardNumber.length !== 19 || expirationDate.length !== 5 || cvv.length !== 3) {
+                    alert('Erro: Dados do cartão inválidos. Por favor, verifique e tente novamente.');
+                    return;
+                }
+
+                // Aqui você enviaria os dados do cartão para a sua API de pagamento
+                const isTransactionSuccessful = Math.random() < 0.5; // Simulação: 50% de chance de erro
+
+                if (isTransactionSuccessful) {
+                    alert('Pagamento com cartão processado com sucesso!');
+                } else {
+                    alert('Erro: Falha na transação do cartão. Por favor, tente novamente.');
+                    return;
+                }
+            } else {
+                // Processamento do pagamento via Pix
+                alert('Pagamento via Pix processado com sucesso!');
+            }
+
+            // Limpa o formulário
+            document.getElementById('paymentForm').reset();
+            toggleCardInfo(false);
+            togglePixInfo(false);
+        }
+    </script>
+</body>
+</html>

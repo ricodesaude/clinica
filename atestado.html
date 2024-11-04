@@ -15,11 +15,13 @@
         /* Estilos do Corpo */
         body {
             font-family: Arial, sans-serif;
-            background: #fff;
+            background: #f7f7f7;
             color: #333;
             display: flex;
             justify-content: center;
-            padding: 20px;
+            align-items: center;
+            min-height: 100vh;
+            padding: 10px;
         }
         
         /* Container principal */
@@ -28,38 +30,35 @@
             width: 100%;
             background: #fff;
             padding: 20px;
-            border: 1px solid #333;
+            border: 1px solid #ddd;
             border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             position: relative;
-            overflow: hidden;
-            margin-top: 20px;
         }
         
-        /* Cabeçalho */
+        /* Cabeçalho e Logo */
         .header {
             text-align: center;
             margin-bottom: 20px;
         }
         
-        /* Logo */
         .logo {
-            width: 80px;
+            width: 70px;
             height: auto;
-            display: block;
-            margin: 0 auto 10px;
+            margin-bottom: 10px;
         }
 
         /* Informações da Clínica */
         .informacoes-clinica {
-            text-align: center;
             font-size: 14px;
             color: #333;
+            margin-bottom: 10px;
         }
 
         /* Título */
         h2 {
             text-align: center;
-            font-size: 1.5em;
+            font-size: 1.4em;
             color: #333;
             margin: 20px 0;
             text-transform: uppercase;
@@ -77,7 +76,7 @@
         /* Área de Assinatura e Carimbo */
         .carimbo {
             border-top: 1px solid #333;
-            margin-top: 40px;
+            margin-top: 20px;
             padding-top: 10px;
             font-size: 0.9em;
             text-align: center;
@@ -87,19 +86,18 @@
         /* Rodapé */
         .footer {
             text-align: center;
-            margin-top: 40px;
+            margin-top: 20px;
             font-size: 0.85em;
             color: #666;
         }
         
-        /* Centralização do botão */
+        /* Botão de Pagamento */
         .button-container {
             display: flex;
             justify-content: center;
             margin-top: 20px;
         }
         
-        /* Estilos do botão de pagamento */
         .botao-pagamento {
             padding: 12px 24px;
             font-size: 1em;
@@ -120,14 +118,15 @@
         @media (max-width: 480px) {
             .container {
                 padding: 15px;
+                box-shadow: none;
             }
 
             .logo {
-                width: 60px;
+                width: 50px;
             }
 
             h2 {
-                font-size: 1.4em;
+                font-size: 1.2em;
             }
 
             p, .carimbo, .footer {

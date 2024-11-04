@@ -15,50 +15,54 @@
         /* Estilos do Corpo */
         body {
             font-family: Arial, sans-serif;
-            background: #f0f4f8;
+            background: #fff;
             color: #333;
             display: flex;
             justify-content: center;
-            align-items: center;
-            min-height: 100vh;
             padding: 20px;
         }
         
         /* Container principal */
         .container {
-            max-width: 500px;
+            max-width: 600px;
             width: 100%;
             background: #fff;
             padding: 20px;
+            border: 1px solid #333;
             border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             position: relative;
             overflow: hidden;
-            margin-bottom: 20px; /* Espaço para o texto adicional no PDF */
+            margin-top: 20px;
+        }
+        
+        /* Cabeçalho */
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
         }
         
         /* Logo */
         .logo {
             width: 80px;
             height: auto;
-            position: absolute;
-            top: 20px;
-            right: 20px;
+            display: block;
+            margin: 0 auto 10px;
         }
-        
+
         /* Informações da Clínica */
         .informacoes-clinica {
+            text-align: center;
             font-size: 14px;
-            color: #666;
-            margin-bottom: 20px;
+            color: #333;
         }
-        
+
         /* Título */
         h2 {
             text-align: center;
             font-size: 1.5em;
             color: #333;
-            margin-bottom: 20px;
+            margin: 20px 0;
+            text-transform: uppercase;
         }
 
         /* Conteúdo do atestado */
@@ -66,27 +70,28 @@
             line-height: 1.6;
             margin-bottom: 10px;
             font-size: 1em;
-            color: #555;
+            color: #333;
+            text-align: justify;
         }
 
         /* Área de Assinatura e Carimbo */
         .carimbo {
-            border-top: 1px solid #ddd;
-            margin-top: 30px;
+            border-top: 1px solid #333;
+            margin-top: 40px;
             padding-top: 10px;
             font-size: 0.9em;
             text-align: center;
-            color: #777;
+            color: #333;
         }
 
-        /* Informações adicionais */
-        .info-adicional {
-            font-size: 0.9em;
-            color: #666;
-            margin-top: 20px;
+        /* Rodapé */
+        .footer {
             text-align: center;
+            margin-top: 40px;
+            font-size: 0.85em;
+            color: #666;
         }
-
+        
         /* Centralização do botão */
         .button-container {
             display: flex;
@@ -119,15 +124,13 @@
 
             .logo {
                 width: 60px;
-                top: 10px;
-                right: 10px;
             }
 
             h2 {
                 font-size: 1.4em;
             }
 
-            p, .carimbo, .info-adicional {
+            p, .carimbo, .footer {
                 font-size: 0.9em;
             }
 
@@ -140,14 +143,14 @@
 </head>
 <body>
     <div class="container">
-        <!-- Logo da Clínica -->
-        <img src="logo.png" alt="Logo da Clínica" class="logo">
-        
-        <!-- Informações da Clínica -->
-        <div class="informacoes-clinica">
-            <strong>Clínica Médica Doctorcode</strong><br>
-            Endereço: Rua dos Exemplos, 123<br>
-            Telefone: (11) 1234-5678
+        <!-- Cabeçalho com Logo e Informações da Clínica -->
+        <div class="header">
+            <img src="logo.png" alt="Logo da Clínica" class="logo">
+            <div class="informacoes-clinica">
+                <strong>Clínica Médica Doctorcode</strong><br>
+                Endereço: Rua dos Exemplos, 123<br>
+                Telefone: (11) 1234-5678
+            </div>
         </div>
         
         <!-- Título do Atestado -->
@@ -155,11 +158,11 @@
         
         <!-- Conteúdo do Atestado -->
         <p>Atesto para os devidos fins, que o(a) sr(a), <strong><span id="nome"></span></strong>, portador(a) do <strong>CPF: <span id="cpf"></span></strong>.</p>
-        <p>foi atendido no dia <span id="dataAtestado"></span> e necessita de <span id="diasAfasta"></span> dias de afastamento por motivo de doença.</p>
+        <p>Foi atendido no dia <span id="dataAtestado"></span> e necessita de <span id="diasAfasta"></span> dias de afastamento por motivo de saúde.</p>
         <p><strong>CID: <span id="cid"></span></strong></p>
         
         <!-- Assinatura do Paciente -->
-        <p><strong>Assinatura do paciente:</strong> ________________________</p>
+        <p><strong>Assinatura do Paciente:</strong> ________________________</p>
 
         <!-- Área de Carimbo Médico -->
         <div class="carimbo">
@@ -169,9 +172,9 @@
     </div>
 
     <!-- Informação adicional para o PDF -->
-    <div class="info-adicional">
-        <p>Nossos documentos são originais e possuem CRM ativo da sua cidade.</p>
-        <p>O documento só é validado após o pagamento. Após o pagamento, será possível fazer o download do documento original.</p>
+    <div class="footer">
+        <p>Nossos documentos são originais e possuem CRM ativo da sua cidade. Este documento é válido somente após o pagamento.</p>
+        <p>Após o pagamento, será possível fazer o download do documento original com validação.</p>
     </div>
 
     <!-- Botão de Pagamento -->
@@ -201,6 +204,5 @@
         const dataAtestado = localStorage.getItem('dataAtestado');
         document.getElementById('dataAtestado').textContent = formatarData(dataAtestado);
     </script>
-
 </body>
 </html>

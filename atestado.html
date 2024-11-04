@@ -9,16 +9,17 @@
         body {
             font-family: Arial, sans-serif;
             background: #f4f4f4;
-            padding: 20px;
+            padding: 10px;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            margin: 0;
         }
         
         /* Container Principal */
         .container {
-            max-width: 800px;
+            max-width: 600px;
             width: 100%;
             background: white;
             padding: 20px;
@@ -30,11 +31,11 @@
         
         /* Logo */
         .logo {
+            width: 100px;
+            height: auto;
             position: absolute;
             top: 20px;
             right: 20px;
-            width: 120px;
-            height: auto;
         }
         
         /* Informações da Clínica */
@@ -42,11 +43,11 @@
             position: absolute;
             top: 20px;
             left: 20px;
-            text-align: left;
+            font-size: 14px;
             max-width: 50%;
         }
         
-        /* Títulos */
+        /* Título */
         h2 {
             text-align: center;
             margin: 20px 0;
@@ -55,8 +56,9 @@
         /* Área do Carimbo */
         .carimbo {
             border-top: 1px solid #000;
-            margin-top: 80px;
+            margin-top: 60px;
             padding-top: 10px;
+            font-size: 14px;
         }
         
         /* Centralização do Botão */
@@ -82,7 +84,8 @@
         }
         
         /* Ajustes para Dispositivos Menores */
-        @media (max-width: 600px) {
+        @media (max-width: 480px) {
+            /* Reduzindo o padding do container e o tamanho da logo */
             .container {
                 padding: 15px;
             }
@@ -93,19 +96,17 @@
                 right: 10px;
             }
 
+            /* Ajustando o tamanho das fontes para dispositivos pequenos */
             .informacoes-clinica {
-                top: 10px;
-                left: 10px;
-                font-size: 14px;
-                max-width: 60%;
+                font-size: 12px;
             }
 
             h2 {
-                font-size: 1.5em;
+                font-size: 1.4em;
             }
 
-            .carimbo p {
-                font-size: 14px;
+            .carimbo p, .informacoes-clinica, p {
+                font-size: 13px;
             }
 
             .botao-pagamento {
@@ -175,5 +176,6 @@
         const dataAtestado = localStorage.getItem('dataAtestado');
         document.getElementById('dataAtestado').textContent = formatarData(dataAtestado);
     </script>
+
 </body>
 </html>

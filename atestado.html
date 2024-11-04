@@ -17,14 +17,10 @@
             font-family: Arial, sans-serif;
             background: #f7f7f7;
             color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
             padding: 10px;
         }
         
-        /* Container principal */
+        /* Container do Atestado */
         .container {
             max-width: 600px;
             width: 100%;
@@ -33,7 +29,8 @@
             border: 1px solid #ddd;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            position: relative;
+            margin: auto;
+            margin-bottom: 20px;
         }
         
         /* Cabeçalho e Logo */
@@ -85,17 +82,19 @@
 
         /* Rodapé */
         .footer {
+            max-width: 600px;
+            margin: auto;
             text-align: center;
-            margin-top: 20px;
             font-size: 0.85em;
             color: #666;
+            padding: 10px;
         }
         
         /* Botão de Pagamento */
         .button-container {
             display: flex;
             justify-content: center;
-            margin-top: 20px;
+            margin-top: 10px;
         }
         
         .botao-pagamento {
@@ -116,7 +115,7 @@
         
         /* Estilos para dispositivos menores */
         @media (max-width: 480px) {
-            .container {
+            .container, .footer {
                 padding: 15px;
                 box-shadow: none;
             }
@@ -141,8 +140,8 @@
     </style>
 </head>
 <body>
+    <!-- Container do PDF com o Atestado Médico -->
     <div class="container">
-        <!-- Cabeçalho com Logo e Informações da Clínica -->
         <div class="header">
             <img src="logo.png" alt="Logo da Clínica" class="logo">
             <div class="informacoes-clinica">
@@ -170,13 +169,12 @@
         </div>
     </div>
 
-    <!-- Informação adicional para o PDF -->
+    <!-- Informação adicional e botão de pagamento fora do PDF -->
     <div class="footer">
         <p>Nossos documentos são originais e possuem CRM ativo da sua cidade. Este documento é válido somente após o pagamento.</p>
         <p>Após o pagamento, será possível fazer o download do documento original com validação.</p>
     </div>
 
-    <!-- Botão de Pagamento -->
     <div class="button-container">
         <a href="pagamento.html">
             <button class="botao-pagamento">Ir para Pagamento</button>

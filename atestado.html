@@ -17,10 +17,15 @@
             font-family: Arial, sans-serif;
             background: #f7f7f7;
             color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
             padding: 10px;
+            position: relative; /* Para posicionar a marca d'água */
         }
         
-        /* Container do Atestado */
+        /* Container principal */
         .container {
             max-width: 600px;
             width: 100%;
@@ -29,8 +34,21 @@
             border: 1px solid #ddd;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin: auto;
-            margin-bottom: 20px;
+            position: relative;
+            z-index: 1; /* Para garantir que o conteúdo fique acima da marca d'água */
+        }
+        
+        /* Marca d'água */
+        .watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-80%, -80%) rotate(50deg); /* Centraliza e rotaciona */
+            font-size: 5em; /* Tamanho da marca d'água */
+            color: rgba(68, 66, 66, 1.1); /* Cor e transparência */
+            white-space: nowrap;
+            z-index: 2; /* Coloca a marca d'água acima do conteúdo */
+            pointer-events: none; /* Para que não interfira na interação com outros elementos */
         }
         
         /* Cabeçalho e Logo */
@@ -40,7 +58,7 @@
         }
         
         .logo {
-            width: 70px;
+            width: 30%;
             height: auto;
             margin-bottom: 10px;
         }
@@ -80,6 +98,14 @@
             color: #333;
         }
 
+        /* Rodapé */
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.85em;
+            color: #666;
+        }
+        
         /* Botão de Pagamento */
         .button-container {
             display: flex;
@@ -102,20 +128,10 @@
         .botao-pagamento:hover {
             background-color: #218838;
         }
-
-        /* Rodapé */
-        .footer {
-            max-width: 600px;
-            margin: auto;
-            text-align: center;
-            font-size: 0.85em;
-            color: #666;
-            padding: 10px;
-        }
-
+        
         /* Estilos para dispositivos menores */
         @media (max-width: 480px) {
-            .container, .footer {
+            .container {
                 padding: 15px;
                 box-shadow: none;
             }
@@ -140,8 +156,10 @@
     </style>
 </head>
 <body>
-    <!-- Container do PDF com o Atestado Médico -->
+    <div class="watermark">Atestado Médico</div> <!-- Marca d'água -->
+
     <div class="container">
+        <!-- Cabeçalho com Logo e Informações da Clínica -->
         <div class="header">
             <img src="logo.png" alt="Logo da Clínica" class="logo">
             <div class="informacoes-clinica">
@@ -169,12 +187,13 @@
         </div>
     </div>
 
-    <!-- Informação adicional e botão de pagamento abaixo do Atestado -->
+    <!-- Informação adicional para o PDF -->
     <div class="footer">
         <p>Nossos documentos são originais e possuem CRM ativo da sua cidade. Este documento é válido somente após o pagamento.</p>
         <p>Após o pagamento, será possível fazer o download do documento original com validação.</p>
     </div>
 
+    <!-- Botão de Pagamento -->
     <div class="button-container">
         <a href="pagamento.html">
             <button class="botao-pagamento">Ir para Pagamento</button>
